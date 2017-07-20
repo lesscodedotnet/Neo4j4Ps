@@ -1,15 +1,16 @@
 $nugetSource = "https://www.nuget.org/api/v2"
-$libDir = "$PSScriptRoot\bin"
-if (!(Test-Path $libDir\Neo4j.Driver.1.4.0\lib\net46\Neo4j.Driver.dll)) {
-  Write-Host "Installing latest Neo4j.Driver from $nugetSource"
-  & $libDir\nuget.exe install Neo4j.Driver -Out $libDir -Source $nugetSource
+$binDir = "$PSScriptRoot\bin"
+$pkgDir = "$binDir\packages"
+if (!(Test-Path $pkgDir\Neo4j.Driver.1.4.0\lib\net46\Neo4j.Driver.dll)) {
+  Write-Host "Installing Neo4j.Driver v1.4.0 from $nugetSource"
+  & $binDir\nuget.exe install Neo4j.Driver -Version 1.4.0 -Out $pkgDir -Source $nugetSource
 }
 
-Import-Module $libDir\Neo4j.Driver.1.4.0\lib\net46\Neo4j.Driver.dll
-Import-Module $libDir\System.Net.Sockets.4.1.0\lib\net46\System.Net.Sockets.dll
-Import-Module $libDir\System.Net.Security.4.0.0\lib\net46\System.Net.Security.dll
-Import-Module $libDir\System.Security.Cryptography.X509Certificates.4.1.0\lib\net46\System.Security.Cryptography.X509Certificates.dll
-Import-Module $libDir\System.Net.NameResolution.4.0.0\lib\net46\System.Net.NameResolution.dll
+Import-Module $pkgDir\Neo4j.Driver.1.4.0\lib\net46\Neo4j.Driver.dll
+Import-Module $pkgDir\System.Net.Sockets.4.1.0\lib\net46\System.Net.Sockets.dll
+Import-Module $pkgDir\System.Net.Security.4.0.0\lib\net46\System.Net.Security.dll
+Import-Module $pkgDir\System.Security.Cryptography.X509Certificates.4.1.0\lib\net46\System.Security.Cryptography.X509Certificates.dll
+Import-Module $pkgDir\System.Net.NameResolution.4.0.0\lib\net46\System.Net.NameResolution.dll
 
 function Invoke-Cypher() {
   [CmdletBinding()]
