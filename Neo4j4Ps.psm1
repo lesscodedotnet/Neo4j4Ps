@@ -48,14 +48,12 @@ function Invoke-Cypher() {
         }
         $session.Run($Cypher, $cypherParams)
       }
-      catch {
+      finally {
         $session.Dispose()
-        throw
       }
     }
-    catch {
+    finally {
       $driver.Dispose()
-      throw
     }
   }
   catch {
